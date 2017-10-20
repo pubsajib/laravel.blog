@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         // Get all post
-        $posts = Post::All();
+        $posts = Post::orderBy('id', 'desc')->paginate(5);
 
         // Pass in on view
         return view('posts.index')->withPosts($posts);
@@ -54,11 +54,8 @@ class PostController extends Controller
         $post->save();
         
         // Success Message
-        // Session::flush('success', 'Created successfully.');
-        // var_dump(Session::has('success')); die();
-
         // Redirect to another page
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('posts.show', $post->id)->with('success', 'Created successfully.');
 
     }
 
@@ -89,7 +86,7 @@ class PostController extends Controller
         $post = Post::find($id);
 
         // Edit post form
-        // return view('posts.edit')->withPost($post);
+        return view('posts.edit')->withPost($post);
         // return view('posts.edit');
     }
 
@@ -102,7 +99,19 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate data
+        $request->validate(array(
+            'title' => 'required|max:128',
+            'content' => 'required',
+        ));
+
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+
+        // Redirect after successfully saved
+        return redirect()->route('posts.show', $post->id)->with('success', 'Updated successfully');
     }
 
     /**
@@ -113,6 +122,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Delete the post
+        $post = Post::find($id);
+        $post->delete();
+
+        // Redirect after delete
+        return redirect()->route('posts.index')->with('success', 'Deleted successfully');
     }
 }

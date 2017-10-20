@@ -27,14 +27,26 @@
     						{{ strlen($post->content) > 50 ? '...' : '' }} 
     					</td>
     					<td> {{ date( 'M j, Y h:i A', strtotime($post->content) ) }} </td>
-    					<td> 
-    						{!! Html::linkRoute('posts.show', 'View', array($post->id), array('class'=>'btn btn-default')) !!}
-    						{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class'=>'btn btn-primary')) !!}
+    					<td style="width: 120px;">
+							<table>
+								<tr>
+									<td>{!! Html::linkRoute('posts.show', 'View', array($post->id), array('class'=>'btn btn-xs btn-default')) !!}</td>
+									<td>{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class'=>'btn btn-xs btn-primary')) !!}</td>
+									<td>
+										{!! Form::open(['method'=>'delete', 'route'=>['posts.destroy', $post->id], 'class'=>'pull-right']) !!}
+										{!! Form::submit('Delete', ['class'=>'btn btn-xs btn-danger']) !!}
+										{!! Form::close() !!}
+									</td>
+								</tr>
+							</table>
     					</td>
     				</tr>
     			@endforeach
     		</tbody>
     	</table>
+		<div class="text-center">
+			{{ $posts->links() }}
+		</div>
     </div>
   </div>
 @endsection
