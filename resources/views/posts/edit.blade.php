@@ -6,13 +6,17 @@
     	{!! Form::model($post, ['route'=>['posts.update', $post->id], 'method'=>'PUT']) !!}
       		<h1>Update Post</h1> <hr>
       		<div class="form-group">
-			    {{ Form::label('title', 'Title : ') }}
-			    {{ Form::text('title', null, array_merge(['class' => 'form-control'])) }}
-			</div>
+            {{ Form::label('title', 'Title : ') }}
+            {{ Form::text('title', null, array_merge(['class' => 'form-control'])) }}
+          </div>
+          <div class="form-group">
+  			    {{ Form::label('slug', 'Slug : ') }}
+  			    {{ Form::text('slug', null, array_merge(['class' => 'form-control'])) }}
+			    </div>
       		<div class="form-group">
-			    {{ Form::label('content', 'Content : ') }}
-			    {{ Form::text('content', null, array_merge(['class' => 'form-control'])) }}
-			</div>
+  			    {{ Form::label('content', 'Content : ') }}
+  			    {{ Form::text('content', null, array_merge(['class' => 'form-control'])) }}
+			    </div>
       		<div class="form-group">
       			<div class="row">
       				<div class="col-sm-6">{!! Html::linkRoute('posts.show', 'Cancel',array($post->id), array('class'=>'btn btn-danger btn-block')) !!}</div>

@@ -9,6 +9,10 @@
 			    {{ Form::label('title', 'Title : ') }}
 			    {{ Form::text('title', null, array_merge(['class' => 'form-control'])) }}
 			</div>
+			<div class="form-group">
+			    {{ Form::label('slug', 'Slug : ') }}
+			    {{ Form::text('slug', null, array_merge(['class' => 'form-control'])) }}
+			</div>
       		<div class="form-group">
 			    {{ Form::label('content', 'Content : ') }}
 			    {{ Form::text('content', null, array_merge(['class' => 'form-control'])) }}
