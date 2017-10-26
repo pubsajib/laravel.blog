@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -77,19 +78,10 @@ class RegisterController extends Controller
     {   
         $res = $this->validator($request->all())->validate();
         $user = $this->create($request->all());
-        // // Prepare the array
-        // $user = [];
-        // $user['name'] = $request->name;
-        // $user['email'] = $request->email;
-        // $user['password'] = $request->password;
-
-        // // Validate the data array
-        // if ( $this->validator($user) ) {
-        //     return 'success';
-        // } else{
-        //     return 'success';
-        // }
-        // $this->create($user);
-        var_dump($res);
+        if ( Auth::loginUsingId($user->id) ) {
+            return view('pages.home');
+        } else {
+            return view('auth.login');
+        }
     }
 }

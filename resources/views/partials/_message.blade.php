@@ -4,6 +4,16 @@
 	</div>
 @endif
 
+@if (Session::has('error'))
+	<div class="alert alert-danger">
+	  <strong>Error!</strong> 
+		  <ul>
+		  	<li>{{ Session::get('error') }}</li>
+		  </ul>
+	</div>
+	</div>
+@endif
+
 @if ( count($errors) > 0 )
 	<div class="alert alert-danger">
 	  <strong>Error!</strong> 
