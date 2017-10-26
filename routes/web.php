@@ -17,6 +17,16 @@
 // Frontend
 Route::group(['middleware' => ['web']], function () {
 
+	// Authentication routes
+	Route::get('auth/login', ['uses'=>'Auth\LoginController@getLogin', 'as'=>'login']);
+	Route::post('auth/login', ['uses'=>'Auth\LoginController@postLogin', 'as'=>'login']);
+	Route::get('auth/logout', ['uses'=>'Auth\LoginController@getLogout', 'as'=>'logout']);
+
+	// Authentication routes
+	Route::get('auth/register', ['uses'=>'Auth\RegisterController@getRegister', 'as'=>'register']);
+	Route::post('auth/register', ['uses'=>'Auth\RegisterController@postRegister', 'as'=>'register']);
+	// Route::post('auth/register', ['uses'=>'Auth\RegisterController@postRegister', 'as'=>'register']);
+
 	// Blog Routes for frontend
 	// Route::get('/blog/{slug}', 'blogController@getSingle')->name('blog.single')->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/blog/{slug}', ['as'=>'blog.single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
