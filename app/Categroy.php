@@ -9,8 +9,8 @@ class Categroy extends Model
     // Since model name is different form DB name
 	protected $table = 'categories';
 
-	public function categroy()
+	public function posts()
 	{
-		return $this->belongsTo('App\Categroy');
+		return $this->hasMany(Post::class);
 	}
 }

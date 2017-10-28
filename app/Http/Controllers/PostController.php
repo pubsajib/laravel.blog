@@ -62,7 +62,7 @@ class PostController extends Controller
         $post           = new Post;
         $post->title    = $request->title;
         $post->slug    = $request->slug;
-        $post->content  = $request->content;
+//        $post->content  = $request->content;
         $post->save();
         
         // Success Message
@@ -80,10 +80,12 @@ class PostController extends Controller
     public function show($id)
     {
         // Get the post content
-        $post = Post::find($id);
+        $data['post'] = Post::where('id', $id)->with('category')->first();
+
+//        dd($data['post']);
 
         // Show the single post
-        return view('posts.show')->withPost($post);
+        return view('posts.show', $data);
     }
 
     /**
@@ -129,7 +131,7 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->slug = $request->slug;
-        $post->content = $request->content;
+//        $post->content = $request->content;
         $post->save();
 
         // Redirect after successfully saved

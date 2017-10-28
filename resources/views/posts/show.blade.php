@@ -1,6 +1,7 @@
 @extends('main')
 @section('title', 'Post')
 @section('content')
+	{{--{{ dd($post) }}--}}
   <div class="row text-center">
   	<a href="{{ route('posts.create') }}" class="btn btn-primary btn-lg">Create New Post</a>
   </div>

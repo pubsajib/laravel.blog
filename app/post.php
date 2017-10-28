@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class post extends Model
 {
     
-	public function categroy()
+	public function category()
 	{
-		return $this->belongsTo('App\Categroy');
+		return $this->belongsTo(Categroy::class);
 	}
 }
