@@ -16,7 +16,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Home</a></li>
-        <li class="{{ Request::is('blog') ? 'active' : '' }}"><a href="blog">Blog</a></li>
+        @if ( Auth::check() )
+        <li class="{{ Request::is('blog') ? 'active' : '' }}"><a href="posts">Posts</a></li>
+        <li class="{{ Request::is('categories') ? 'active' : '' }}"><a href="categories">Categories</a></li>
+        @endif
         <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="about">About</a></li>
         <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="contact">Contact</a></li>
       </ul>

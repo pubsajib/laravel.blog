@@ -62,7 +62,7 @@ class PostController extends Controller
         $post           = new Post;
         $post->title    = $request->title;
         $post->slug    = $request->slug;
-//        $post->content  = $request->content;
+        $post->content  = $request->content;
         $post->save();
         
         // Success Message

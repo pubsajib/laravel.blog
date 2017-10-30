@@ -8,6 +8,8 @@
     <div class="col-md-8">
       	<h1>{{ $post->title }}</h1>
       	<p>{{ $post->content }}</p>
+      	<br><br>
+      	<p>Posted In : {{ $post->category->name }}</p>
     </div>
     <div class="col-md-4">
     	<div class="well text-left">

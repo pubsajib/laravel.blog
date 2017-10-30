@@ -25,10 +25,11 @@ Route::group(['middleware' => ['web']], function () {
 	// Authentication routes
 	Route::get('auth/register', ['uses'=>'Auth\RegisterController@getRegister', 'as'=>'register']);
 	Route::post('auth/register', ['uses'=>'Auth\RegisterController@postRegister', 'as'=>'register']);
-	// Route::post('auth/register', ['uses'=>'Auth\RegisterController@postRegister', 'as'=>'register']);
+
+	// Category Routes
+	Route::resource('categories', 'CategoryController', ['except'=>['create']]);
 
 	// Blog Routes for frontend
-	// Route::get('/blog/{slug}', 'blogController@getSingle')->name('blog.single')->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/blog/{slug}', ['as'=>'blog.single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/blog', ['uses'=>'blogController@index', 'as'=>'blog']);
 
