@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 use App\Post;
 use Session;
 
@@ -39,8 +40,17 @@ class PostController extends Controller
      */
     public function create()
     {
+        // Get all posts for select view
+        $categories = Category::all();
+        $cats = [];
+        if ($categories) {
+            foreach ($categories as $category) {
+                $cats[$category->id] = $category->name;
+            }
+        }
+
         // Create new post form
-        return view('posts.create');
+        return view('posts.create')->withCategories($cats);
     }
 
     /**
@@ -55,14 +65,16 @@ class PostController extends Controller
         $request->validate(array(
             'title' => 'required|max:255',
             'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            'category_id' => 'required|integer',
             'content' => 'required',
             ));
         
         // Store in the database
-        $post           = new Post;
-        $post->title    = $request->title;
-        $post->slug    = $request->slug;
-        $post->content  = $request->content;
+        $post               = new Post;
+        $post->title        = $request->title;
+        $post->slug         = $request->slug;
+        $post->category_id  = $request->category_id;
+        $post->content      = $request->content;
         $post->save();
         
         // Success Message
@@ -82,8 +94,6 @@ class PostController extends Controller
         // Get the post content
         $data['post'] = Post::where('id', $id)->with('category')->first();
 
-//        dd($data['post']);
-
         // Show the single post
         return view('posts.show', $data);
     }
@@ -97,11 +107,20 @@ class PostController extends Controller
     public function edit($id)
     {
         // Get the post content
-        $post = Post::find($id);
+        $data['post'] = Post::find($id);
+
+        // Get all posts for select view
+        $categories = Category::all();
+        $cats = [];
+        if ($categories) {
+            foreach ($categories as $category) {
+                $cats[$category->id] = $category->name;
+            }
+        }
+        $data['categories'] = $cats;
 
         // Edit post form
-        return view('posts.edit')->withPost($post);
-        // return view('posts.edit');
+        return view('posts.edit', $data);
     }
 
     /**
@@ -118,20 +137,23 @@ class PostController extends Controller
         // Validate data
         if ( $request->input('slug') == $post->slug ) {
             $request->validate(array(
-                'title' => 'required|max:255',
-                'content' => 'required',
+                'title'         => 'required|max:255',
+                'category_id'   => 'required|integer',
+                'content'       => 'required',
             ));
         } else {
             $request->validate(array(
-                'title' => 'required|max:255',
-                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'content' => 'required',
+                'title'         => 'required|max:255',
+                'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'category_id'   => 'required|integer',
+                'content'       => 'required',
             ));
         }
 
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-//        $post->content = $request->content;
+        $post->title        = $request->title;
+        $post->slug         = $request->slug;
+        $post->category_id  = $request->category_id;
+        $post->content      = $request->content;
         $post->save();
 
         // Redirect after successfully saved

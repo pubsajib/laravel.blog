@@ -13,6 +13,10 @@
 			    {{ Form::label('slug', 'Slug : ') }}
 			    {{ Form::text('slug', null, array_merge(['class' => 'form-control'])) }}
 			</div>
+			<div class="form-group">
+			    {{ Form::label('category_id', 'Category : ') }}
+			    {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+			</div>
       		<div class="form-group">
 			    {{ Form::label('content', 'Content : ') }}
 			    {{ Form::text('content', null, array_merge(['class' => 'form-control'])) }}

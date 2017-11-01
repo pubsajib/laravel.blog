@@ -6,7 +6,7 @@
     <body>
         @include('partials._navigation')
         <div class="container">
-            {{ Auth::check() ? 'Logged In' : 'Logged Out' }}
+            {{-- {{ Auth::check() ? 'Logged In' : 'Logged Out' }} --}}
             @include('partials._message')
             @yield('content')
             @include('partials._footer')
