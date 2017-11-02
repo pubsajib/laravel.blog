@@ -29,6 +29,9 @@ Route::group(['middleware' => ['web']], function () {
 	// Category Routes
 	Route::resource('categories', 'CategoryController', ['except'=>['create']]);
 
+	// Tags Routes
+	Route::resource('tags', 'TagController', ['except'=>['create']]);
+
 	// Blog Routes for frontend
 	Route::get('/blog/{slug}', ['as'=>'blog.single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/blog', ['uses'=>'blogController@index', 'as'=>'blog']);

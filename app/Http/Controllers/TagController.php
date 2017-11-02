@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Category;
-class CategoryController extends Controller
+use App\Tag;
+
+class TagController extends Controller
 {
-    
     function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +19,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // Fetch all categories
-        $categories = Category::all();
-        return view('categories.index')->withCategories($categories);
+        // Fetch all tags
+        $tags = Tag::all();
+        return view('tags.index')->withTags($tags);
     }
 
     /**
@@ -37,14 +37,13 @@ class CategoryController extends Controller
             'name' => 'required|max:255'
         ]);
 
-        // Store categories
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
-        $category = $category->all();
+        // Store tags
+        $tag = new Tag;
+        $tag->name = $request->name;
+        $tag->save();
+        $tag = $tag->all();
 
-        return redirect()->route('categories.index')->with('success', 'Created successfully.');
-
+        return redirect()->route('tags.index')->with('success', 'Created successfully.');
     }
 
     /**
@@ -55,7 +54,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        // Show the single tag related posts
+        $data['tag'] = [];
+
+        // Show the single post
+        return view('posts.show', $data);
     }
 
     /**
@@ -66,7 +69,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Find the tag
+        $data['tag'] = Tag::find($id);
+        return view('tags.edit', $data);
     }
 
     /**
@@ -78,7 +83,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate the name
+        $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        // Store tags
+        $tag = Tag::find($id);
+        $tag->name = $request->name;
+        $tag->save();
+        $tag = $tag->all();
+
+        return redirect()->route('tags.index')->with('success', 'Created successfully.');
     }
 
     /**
@@ -89,15 +105,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //Delete the category
-        $category = Category::find($id);
-        $category->delete();
-        $category = $category->all();
+        //Delete the tag
+        $tag = Tag::find($id);
+        $tag->delete();
+        $tag = $tag->all();
 
 
         // Redirect after delete
-        return redirect()->route('categories.index')
-        ->withCategories($category)
+        return redirect()->route('tags.index')
+        ->withCategories($tag)
         ->with('success', 'Deleted successfully.');
     }
 }
