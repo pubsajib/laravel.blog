@@ -7,9 +7,12 @@
   <div class="row">
     <div class="col-md-8">
       	<h1>{{ $post->title }}</h1>
+      	<p>
+			@foreach( $post->tag as $tag )
+				<span class="label label-default">{{ $tag->name }}</span>
+			@endforeach
+      	</p>
       	<p>{{ $post->content }}</p>
-      	<br><br>
-      	<p>Posted In : {{ $post->category->name }}</p>
     </div>
     <div class="col-md-4">
     	<div class="well text-left">
@@ -17,6 +20,10 @@
 				<tr>
 					<td>Url : </td>
 					<td><a href="{{ url($post->slug) }}">{{ url($post->slug) }}</a></td>
+				</tr>
+				<tr>
+					<td>Posted In : </td>
+					<td><a href="{{ route('categories.index') }}">{{ $post->category->name }}</a></td>
 				</tr>
 				<tr>
 					<td>Created At : </td>

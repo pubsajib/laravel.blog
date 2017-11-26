@@ -15,7 +15,7 @@
     			<tbody>
     				@foreach ($tags as $tag)
     				<tr>
-    					<td> {{ $tag->name }} </td>
+    					<td> <a href="{{ route('tags.show', $tag) }}">{{ $tag->name }}</a> </td>
     					<td> 
 							{!! Html::linkRoute('tags.edit', 'Edit', ['id'=>$tag->id], ['class'=>'btn btn-xs btn-primary']) !!}
 							{!! Form::open(['method'=>'delete', 'route'=>['tags.destroy', $tag->id], 'class'=>'pull-right']) !!}

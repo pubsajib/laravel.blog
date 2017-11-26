@@ -55,7 +55,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        // Get the category
+        $data['category'] = Category::where('id', $id)->with('posts')->first();
+        return view('categories.single', $data);
     }
 
     /**

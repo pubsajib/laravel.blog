@@ -15,7 +15,7 @@
     			<tbody>
     				@foreach ($categories as $category)
     				<tr>
-    					<td> {{ $category->name }} </td>
+    					<td> <a href="{{ route('categories.show', $category) }}"> {{ $category->name }} </a> </td>
     					<td> 
 							{!! Html::linkRoute('categories.edit', 'Edit', ['id'=>$category->id], ['class'=>'btn btn-xs btn-primary']) !!}
 							{!! Form::open(['method'=>'delete', 'route'=>['categories.destroy', $category->id], 'class'=>'pull-right']) !!}

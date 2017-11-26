@@ -36,11 +36,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/blog/{slug}', ['as'=>'blog.single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/blog', ['uses'=>'blogController@index', 'as'=>'blog']);
 
+	// Post routes for backend
+	Route::resource('posts', 'PostController');
+
 	// Static pages
 	Route::get('about', 'pageController@about');
 	Route::get('contact', 'pageController@contact');
+	Route::get('/{slug}', ['as'=>'single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/', 'pageController@home');
-
-	// Post routes for backend
-	Route::resource('posts', 'PostController');
 });

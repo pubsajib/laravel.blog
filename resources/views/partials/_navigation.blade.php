@@ -9,13 +9,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Laravel Blog</a>
+      <a class="navbar-brand" href="/laravel.blog/public">Laravel Blog</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Home</a></li>
+        <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/laravel.blog/public">Home</a></li>
         @if ( Auth::check() )
         <li class="{{ Request::is('blog') ? 'active' : '' }}"><a href="posts">Posts</a></li>
         <li class="{{ Request::is('categories') ? 'active' : '' }}"><a href="categories">Categories</a></li>

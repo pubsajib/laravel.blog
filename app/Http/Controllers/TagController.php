@@ -55,10 +55,10 @@ class TagController extends Controller
     public function show($id)
     {
         // Show the single tag related posts
-        $data['tag'] = [];
+        $data['tag'] = Tag::where('id', $id)->first();
 
         // Show the single post
-        return view('posts.show', $data);
+        return view('tags.single', $data);
     }
 
     /**

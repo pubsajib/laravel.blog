@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
+use App\Tag;
 use Session;
 
 class PostController extends Controller
@@ -48,9 +49,20 @@ class PostController extends Controller
                 $cats[$category->id] = $category->name;
             }
         }
+        $data['categories'] = $cats;
+        
+        // Get all tags for select view
+        $allTags = Tag::all();
+        $tags = [];
+        if ($allTags) {
+            foreach ($allTags as $singleTag) {
+                $tags[$singleTag->id] = $singleTag->name;
+            }
+        }
+        $data['allTags'] = $tags;
 
         // Create new post form
-        return view('posts.create')->withCategories($cats);
+        return view('posts.create', $data);
     }
 
     /**
@@ -76,6 +88,9 @@ class PostController extends Controller
         $post->category_id  = $request->category_id;
         $post->content      = $request->content;
         $post->save();
+
+        // Insert into post_tags table
+        $post->tag()->sync($request->tags, false);
         
         // Success Message
         // Redirect to another page
@@ -92,8 +107,7 @@ class PostController extends Controller
     public function show($id)
     {
         // Get the post content
-        $data['post'] = Post::where('id', $id)->with('category')->first();
-
+        $data['post'] = Post::where('id', $id)->with('tag')->with('category')->first();
         // Show the single post
         return view('posts.show', $data);
     }
@@ -119,6 +133,15 @@ class PostController extends Controller
         }
         $data['categories'] = $cats;
 
+        // Get all tags for select view
+        $allTags = Tag::all();
+        $tags = [];
+        if ($allTags) {
+            foreach ($allTags as $singleTag) {
+                $tags[$singleTag->id] = $singleTag->name;
+            }
+        }
+        $data['allTags'] = $tags;
         // Edit post form
         return view('posts.edit', $data);
     }
@@ -132,6 +155,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $post = Post::find($id);
 
         // Validate data
@@ -155,6 +179,10 @@ class PostController extends Controller
         $post->category_id  = $request->category_id;
         $post->content      = $request->content;
         $post->save();
+
+        // Update into post_tags table
+        if ( isset($request->tags) ) $post->tag()->sync($request->tags, true);
+        else $post->tag()->sync([], true);
 
         // Redirect after successfully saved
         return redirect()->route('posts.show', $post->id)->with('success', 'Updated successfully');
