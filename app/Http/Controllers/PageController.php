@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Email;
+
 class PageController extends Controller
 {
     // Home page controller
@@ -24,10 +26,20 @@ class PageController extends Controller
     }
 
     // Contact page controller
-    public function contact()
+    public function getContact()
     {
         // Get all post
         // Pass in on view
+        return view('pages.contact');
+    }
+    public function postContact(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'subject' => 'required|min:3'
+        ]);
+        $data = [];
+        // dd($request);
         return view('pages.contact');
     }
 }

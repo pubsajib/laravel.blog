@@ -39,9 +39,14 @@ Route::group(['middleware' => ['web']], function () {
 	// Post routes for backend
 	Route::resource('posts', 'PostController');
 
+	// Mail templates
+	Route::get('mailable', 'pageController@about');
+	
+
 	// Static pages
 	Route::get('about', 'pageController@about');
-	Route::get('contact', 'pageController@contact');
+	Route::get('contact', 'pageController@getContact');
+	Route::post('contact', 'pageController@postContact');
 	Route::get('/{slug}', ['as'=>'single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/', 'pageController@home');
 });

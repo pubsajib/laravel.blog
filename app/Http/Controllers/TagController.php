@@ -92,7 +92,7 @@ class TagController extends Controller
         $tag = Tag::find($id);
         $tag->name = $request->name;
         $tag->save();
-        $tag = $tag->all();
+        // $tag = $tag->all();
 
         return redirect()->route('tags.index')->with('success', 'Created successfully.');
     }
@@ -108,7 +108,6 @@ class TagController extends Controller
         //Delete the tag
         $tag = Tag::find($id);
         $tag->delete();
-        $tag = $tag->all();
 
 
         // Redirect after delete
