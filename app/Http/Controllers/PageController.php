@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use Email;
+use App\Mail\Contact;
 
 class PageController extends Controller
 {
@@ -38,8 +38,11 @@ class PageController extends Controller
             'email' => 'required|email',
             'subject' => 'required|min:3'
         ]);
-        $data = [];
-        // dd($request);
-        return view('pages.contact');
+        \Mail::to('pubsajib@gmail.com')->send(new Contact($request));
+        return redirect()->route('contact')->with('success', 'Mail sent successfully');
+    }
+    public function mailTemplate()
+    {
+        return new Contact();
     }
 }

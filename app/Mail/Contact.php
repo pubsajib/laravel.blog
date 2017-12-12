@@ -11,14 +11,20 @@ class Contact extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $E_email      = '';
+    private $E_subject    = '';
+    private $E_body       = '';
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($formData)
     {
-        //
+        $this->E_email    = $formData->email;
+        $this->E_subject  = $formData->subject;
+        $this->E_body     = $formData->message;
     }
 
     /**
@@ -28,6 +34,9 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $data['E_email']      = $this->E_email;
+        $data['E_subject']    = $this->E_subject;
+        $data['E_body']       = $this->E_body;
+        return $this->view('email.contact', $data);
     }
 }

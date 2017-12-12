@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
 use App\Tag;
+use App\Services\Slug;
 use Session;
 
 class PostController extends Controller
@@ -73,20 +74,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $user = \Auth::user();
+        $slug = new Slug;
+
         // Validate data
         $request->validate(array(
             'title' => 'required|max:255',
-            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            // 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'category_id' => 'required|integer',
             'content' => 'required',
             ));
-        
+        // dd($slug->createSlug($request->title));
         // Store in the database
         $post               = new Post;
         $post->title        = $request->title;
-        $post->slug         = $request->slug;
+        $post->slug         = $slug->createSlug($request->title);
         $post->category_id  = $request->category_id;
         $post->content      = $request->content;
+        $post->user_id      = $user->id;
         $post->save();
 
         // Insert into post_tags table

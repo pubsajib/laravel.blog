@@ -20,6 +20,7 @@
 			    {{ Form::submit('LogIn', array_merge(['class' => 'btn btn-success btn-lg btn-block'])) }}
 			</div>
 		{!! Form::close() !!}
+		<p>Dont have account? Please <a href="{{ url('auth/register') }}"> register. </a> </p>
     </div>
   </div>
 @endsection

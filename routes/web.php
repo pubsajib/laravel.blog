@@ -22,6 +22,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('auth/login', ['uses'=>'Auth\LoginController@postLogin', 'as'=>'login']);
 	Route::get('auth/logout', ['uses'=>'Auth\LoginController@getLogout', 'as'=>'logout']);
 
+	// User routes
+	Route::get('users', ['uses'=>'UserController@index', 'as'=>'users']);
+	Route::get('user/{id}', ['uses'=>'UserController@edit', 'as'=>'users.edit']);
+	Route::put('user/{id}', ['uses'=>'UserController@store', 'as'=>'users.edit']);
+	Route::delete('users/{id}', ['uses'=>'UserController@destroy', 'as'=>'users.delete']);
+
 	// Authentication routes
 	Route::get('auth/register', ['uses'=>'Auth\RegisterController@getRegister', 'as'=>'register']);
 	Route::post('auth/register', ['uses'=>'Auth\RegisterController@postRegister', 'as'=>'register']);
@@ -40,13 +46,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('posts', 'PostController');
 
 	// Mail templates
-	Route::get('mailable', 'pageController@about');
+	Route::get('mailable', 'PageController@mailTemplate');
 	
 
 	// Static pages
 	Route::get('about', 'pageController@about');
-	Route::get('contact', 'pageController@getContact');
-	Route::post('contact', 'pageController@postContact');
+	Route::get('contact', ['as' => 'contact', 'uses'=>'pageController@getContact']);
+	Route::post('contact', ['as' => 'contact', 'uses' => 'pageController@postContact']);
 	Route::get('/{slug}', ['as'=>'single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/', 'pageController@home');
 });
