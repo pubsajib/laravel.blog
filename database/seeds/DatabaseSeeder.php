@@ -30,9 +30,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-        	['name' => 'Category 1'],
-        	['name' => 'Category 2'],
-        	['name' => 'Category 3']
+            ['name' => 'Category 1'],
+            ['name' => 'Category 2'],
+            ['name' => 'Category 3']
+        ]);
+
+        DB::table('tags')->insert([
+        	['name' => 'HTML'],
+        	['name' => 'CSS'],
+            ['name' => 'PHP'],
+            ['name' => 'JQUERY'],
+            ['name' => 'Java Script'],
+        	['name' => 'Json']
         ]);
     }
 }

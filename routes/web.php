@@ -23,10 +23,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('auth/logout', ['uses'=>'Auth\LoginController@getLogout', 'as'=>'logout']);
 
 	// User routes
-	Route::get('users', ['uses'=>'UserController@index', 'as'=>'users']);
-	Route::get('user/{id}', ['uses'=>'UserController@edit', 'as'=>'users.edit']);
-	Route::put('user/{id}', ['uses'=>'UserController@store', 'as'=>'users.edit']);
-	Route::delete('users/{id}', ['uses'=>'UserController@destroy', 'as'=>'users.delete']);
+	Route::resource('user', 'UserController', ['except'=>['create', 'store']]);
 
 	// Authentication routes
 	Route::get('auth/register', ['uses'=>'Auth\RegisterController@getRegister', 'as'=>'register']);

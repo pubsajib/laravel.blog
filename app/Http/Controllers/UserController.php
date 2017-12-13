@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
+use App\User;
 
 class UserController extends Controller
 {
@@ -18,28 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $users = User::all();
+        return view('users.index')->withUsers($users);
     }
 
     /**
@@ -50,7 +31,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::where('id', $id)->with('posts')->get();
+        dd($user);
     }
 
     /**
@@ -61,7 +43,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd('edit user');
     }
 
     /**
@@ -73,7 +55,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd('update user');
     }
 
     /**
@@ -84,6 +66,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd('destroy user');
     }
 }
