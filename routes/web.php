@@ -42,6 +42,9 @@ Route::group(['middleware' => ['web']], function () {
 	// Post routes for backend
 	Route::resource('posts', 'PostController');
 
+	// Post routes for backend
+	Route::resource('comments', 'CommentController', ['except'=>['create']]);
+
 	// Mail templates
 	Route::get('mailable', 'PageController@mailTemplate');
 	

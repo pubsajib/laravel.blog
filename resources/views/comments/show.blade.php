@@ -13,8 +13,6 @@
 			@endforeach
       	</p>
       	<p>{{ $post->content }}</p>
-
-      	@include ('../comments/create');
     </div>
     <div class="col-md-4">
     	<div class="well text-left">
