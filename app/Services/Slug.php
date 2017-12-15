@@ -12,8 +12,7 @@ class Slug
      * @return string
      * @throws \Exception
      */
-    public function createSlug($title, $id = 0)
-    {
+    public function createSlug($title, $id = 0) {
         // Normalize the title
         $slug = str_slug($title);
 
@@ -22,7 +21,7 @@ class Slug
         $allSlugs = $this->getRelatedSlugs($slug, $id);
 
         // If we haven't used it before then we are all good.
-        if (! $allSlugs->contains('slug', $slug)){
+        if (! $allSlugs->contains('slug', $slug)) {
             return $slug;
         }
 
