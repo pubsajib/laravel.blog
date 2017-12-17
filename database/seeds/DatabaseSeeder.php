@@ -44,11 +44,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('comments')->insert([
-            ['title' => 'HTML',   'post_id' => 1, 'user_id'=>1, 'is_approved'=> 1, 'body' => 'HTML comment content comment content.'],
-            ['title' => 'CSS',    'post_id' => 1, 'user_id'=>2, 'is_approved'=> 1, 'body' => 'CSS comment content comment content.'],
-            ['title' => 'PHP',    'post_id' => 1, 'user_id'=>1, 'is_approved'=> 1, 'body' => 'PHP comment content comment content.'],
-            ['title' => 'JQUERY', 'post_id' => 2, 'user_id'=>2, 'is_approved'=> 1, 'body' => 'JQUERY comment content comment content.'],
-            ['title' => 'Java',   'post_id' => 2, 'user_id'=>1, 'is_approved'=> 1, 'body' => 'Java comment content comment content.'],
+            ['title' => 'HTML',   'post_id' => 1, 'user_id'=>1, 'is_approved'=> 1, 'body' => 'HTML comment content comment content content.'],
+            ['title' => 'CSS',    'post_id' => 1, 'user_id'=>2, 'is_approved'=> 1, 'body' => 'CSS comment content content comment content content.'],
+            ['title' => 'PHP',    'post_id' => 1, 'user_id'=>1, 'is_approved'=> 1, 'body' => 'PHP comment content content comment content content.'],
+            ['title' => 'JQUERY', 'post_id' => 2, 'user_id'=>2, 'is_approved'=> 1, 'body' => 'JQUERY comment content content comment content content.'],
+            ['title' => 'Java',   'post_id' => 2, 'user_id'=>1, 'is_approved'=> 1, 'body' => 'Java comment content content comment content content.'],
             ['title' => 'Json',   'post_id' => 3, 'user_id'=>2, 'is_approved'=> 1, 'body' => 'Json comment content comment content.']
         ]);
 
