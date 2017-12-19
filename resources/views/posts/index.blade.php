@@ -12,7 +12,8 @@
     			<tr>
     				<th> # </th>
     				<th> Title </th>
-    				<th> Content </th>
+                    <th> Content </th>
+    				<th> Author </th>
     				<th> Created At </th>
     				<th> Actions </th>
     			</tr>
@@ -26,6 +27,7 @@
     						{{ substr( $post->content, 0, 50) }} 
     						{{ strlen($post->content) > 50 ? '...' : '' }} 
     					</td>
+                        <td> {{ $post->author->name }} </td>
     					<td> {{ date( 'M j, Y h:i A', strtotime($post->content) ) }} </td>
     					<td style="width: 120px;">
 							<table>

@@ -13,8 +13,8 @@
     				<th> Title </th>
                     <th> Content </th>
                     <th> Post </th>
-    				<th> Author </th>
-    				<th> Created At </th>
+                    <th> Author </th>
+    				<th> Is Active </th>
     				<th> Actions </th>
     			</tr>
     		</thead>
@@ -24,9 +24,9 @@
     					<th> {{ $comment->id }} </th>
                         <td> <a href="{{ route('comments.show', $comment) }}"> {{ $comment->title }} </a></td>
                         <td> {{ substr( $comment->body, 0, 50) }} </td>
-                        <td> {{ $comment }} </td>
-                        <td> Author Name </td>
-    					<td> {{ $comment->created_at }} </td>
+                        <td> {{ $comment->post->title }} </td>
+                        <td> {{ $comment->author->name }} </td>
+                        <td> {{ $comment->is_approved ? 'Approved' : 'Not Approved' }} </td>
     					<td style="width: 120px;">
 							<table>
 								<tr>

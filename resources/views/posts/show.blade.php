@@ -14,7 +14,7 @@
       	</p>
       	<p>{{ $post->content }}</p>
 
-      	@include ('../comments/create');
+      	@include ('../comments/create')
     </div>
     <div class="col-md-4">
     	<div class="well text-left">
@@ -26,6 +26,10 @@
 				<tr>
 					<td>Posted In : </td>
 					<td><a href="{{ route('categories.index') }}">{{ $post->category->name }}</a></td>
+				</tr>
+				<tr>
+					<td>Author : </td>
+					<td><a href="{{ route('user.show', $post->author) }}">{{ $post->author->name }}</a></td>
 				</tr>
 				<tr>
 					<td>Created At : </td>

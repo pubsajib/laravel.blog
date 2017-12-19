@@ -1,3 +1,4 @@
-.btnSpacing{
-	margin-top: 18px;
-}
+.btnSpacing{margin-top: 18px; }
+.label.label-default{margin-right: 5px;}
+.label.label-default a{color: #fff; }
+.bordered{border: 1px solid;}

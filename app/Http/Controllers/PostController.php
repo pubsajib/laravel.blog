@@ -29,8 +29,7 @@ class PostController extends Controller
     public function index()
     {
         // Get all post
-        $posts = Post::orderBy('id', 'desc')->paginate(5);
-
+        $posts = Post::orderBy('id', 'desc')->with('category', 'author')->paginate(5);
         // Pass in on view
         return view('posts.index')->withPosts($posts);
     }
@@ -112,7 +111,7 @@ class PostController extends Controller
     public function show($id)
     {
         // Get the post content
-        $data['post'] = Post::where('id', $id)->with('tag')->with('category')->first();
+        $data['post'] = Post::where('id', $id)->with('tag', 'category', 'author')->first();
         // Show the single post
         return view('posts.show', $data);
     }

@@ -31,8 +31,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id', $id)->with('posts')->get();
-        dd($user);
+        $user = User::where('id', $id)->with('posts', 'comments')->first();
+        return view('users.show')->withUser($user);
     }
 
     /**

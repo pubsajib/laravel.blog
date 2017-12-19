@@ -14,7 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::orderBy('id', 'desc')->with('post')->with('author')->get();
+        $comments = Comment::orderBy('id', 'desc')->with('post', 'author')->get();
         return view('comments.index')->withComments($comments);
     }
 
@@ -25,7 +25,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        // Dont need right now
     }
 
     /**
@@ -62,7 +62,8 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $comment = Comment::where('id', $id)->with('post', 'author')->first();
+        return view('comments.show')->withComment($comment); 
     }
 
     /**
@@ -73,7 +74,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::find($id);
+        return view('comments.edit')->withComment($comment); 
     }
 
     /**
@@ -85,7 +87,19 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'         => 'required',
+            'body'          => 'required',
+            'is_approved'   => 'required'
+        ]);
+
+        $comment = Comment::find($id);
+        $comment->title     = $request->title;
+        $comment->body      = $request->body;
+        $comment->is_approved   = $request->is_approved;
+        $comment->save();
+
+        return redirect()->route('comments.show', $id)->with('success', 'Updated successfully');
     }
 
     /**
@@ -96,6 +110,8 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+        return redirect()->route('comments.index')->with('success', 'successfully deleted.');
     }
 }
