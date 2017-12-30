@@ -39,8 +39,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         // Get all posts for select view
         $categories = Category::all();
         $cats = [];
@@ -71,8 +70,8 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+        // dd($request);
         $user = \Auth::user();
         $slug = new Slug;
 
@@ -112,6 +111,7 @@ class PostController extends Controller
     {
         // Get the post content
         $data['post'] = Post::where('id', $id)->with('tag', 'category', 'author')->first();
+        // $data['post'] = Post::where('id', $id)->with('comment')->first(); // dd($data);
         // Show the single post
         return view('posts.show', $data);
     }

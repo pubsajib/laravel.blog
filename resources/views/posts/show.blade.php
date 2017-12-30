@@ -1,5 +1,18 @@
 @extends('main')
 @section('title', 'Post')
+@section('stylesheets')
+	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+	<script>
+	tinymce.init({
+	  selector: 'textarea',
+	  branding: false,
+	  menubar : false,
+	  statusbar: false,
+	  plugins: [ 'autosave', 'lists', 'autolink', 'link', 'image' ],
+	  toolbar: 'undo redo | styleselect | bold italic | link unlink image | alignleft aligncenter alignright outdent indent | bullist numlist',
+	});
+	</script>
+@endsection
 @section('content')
   <div class="row text-center">
   	<a href="{{ route('posts.create') }}" class="btn btn-primary btn-lg">Create New Post</a>
