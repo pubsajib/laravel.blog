@@ -20,6 +20,6 @@ class post extends Model
 	}
 	public function comment()
 	{
-		return $this->belongsToMany(Comment::class);
+		return $this->hasMany(Comment::class);
 	}
 }

@@ -19,9 +19,9 @@
         @foreach ($posts as $post)
           <div class="post">
             <h3>{!! Html::linkRoute('posts.show', $post->title, [$post->id] ) !!}</h3>
-            <p>{{ substr($post->content, 0, 200) }} {{ strlen($post->content) > 200 ? ' ...' : '' }} </p>
-            @if ( strlen($post->content) > 200 )
-              {!! Html::linkRoute('posts.show', 'Read More', [$post->id], ['class'=>'btn btn-primary']) !!}
+            <p>{{ excerpt($post->content) }} </p>
+            @if ( strlen(strip_tags($post->content)) > 50 )
+              {!! Html::linkRoute('blog.single', 'Read More', [$post->slug], ['class'=>'btn btn-primary']) !!}
             @endif
           </div><hr>
         @endforeach

@@ -23,7 +23,7 @@
     				<tr>
     					<th> {{ $comment->id }} </th>
                         <td> <a href="{{ route('comments.show', $comment) }}"> {{ $comment->title }} </a></td>
-                        <td> {{ substr( $comment->body, 0, 50) }} </td>
+                        <td> {{ excerpt($comment->body) }} </td>
                         <td> {{ $comment->post->title }} </td>
                         <td> {{ $comment->author->name }} </td>
                         <td> {{ $comment->is_approved ? 'Approved' : 'Not Approved' }} </td>

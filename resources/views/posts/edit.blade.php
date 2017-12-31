@@ -3,21 +3,12 @@
 @section('stylesheets')
   {!! Html::style('css/select2.min.css') !!}
   <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
-  <script>
-    tinymce.init({
-      selector: 'textarea',
-      branding: false,
-      menubar : false,
-      statusbar: false,
-      plugins: [ 'autosave', 'lists', 'autolink', 'link', 'image' ],
-      toolbar: 'undo redo | styleselect | bold italic | link unlink image | alignleft aligncenter alignright outdent indent | bullist numlist',
-    });
-  </script>
+  {!! Html::script('js/tinymce.js') !!}
 @endsection
 @section('content')
   <div class="row">
     <div class="col-sm-12"><h1>Update Post</h1> <hr></div>
-    {!! Form::model($post, ['route'=>['posts.update', $post->id], 'method'=>'PUT']) !!}
+    {!! Form::model($post, ['route'=>['posts.update', $post->id], 'method'=>'PUT', 'files'=>true]) !!}
       <div class="col-sm-8">
         <div class="well">
           <div class="form-group">
@@ -43,6 +34,10 @@
           <div class="form-group">
             {{ Form::label('tags', 'Tags : ') }}
             {{ Form::select('tags[]', $allTags, null, ['class' => 'form-control sleectTags', 'multiple'=>'true']) }}
+          </div>
+          <div class="form-group">
+            {{ Form::label('image', 'Featured Image : ') }}
+            {{ Form::file('image', null, ['class' => 'form-control']) }}
           </div>
       		<div class="form-group">
       			<div class="row">

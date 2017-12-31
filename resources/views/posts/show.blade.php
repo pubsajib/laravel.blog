@@ -1,32 +1,32 @@
 @extends('main')
 @section('title', 'Post')
 @section('stylesheets')
+	{!! Html::style('css/styles.css') !!}
 	<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
-	<script>
-	tinymce.init({
-	  selector: 'textarea',
-	  branding: false,
-	  menubar : false,
-	  statusbar: false,
-	  plugins: [ 'autosave', 'lists', 'autolink', 'link', 'image' ],
-	  toolbar: 'undo redo | styleselect | bold italic | link unlink image | alignleft aligncenter alignright outdent indent | bullist numlist',
-	});
-	</script>
+	{!! Html::script('js/tinymce.js') !!}
 @endsection
 @section('content')
-  <div class="row text-center">
-  	<a href="{{ route('posts.create') }}" class="btn btn-primary btn-lg">Create New Post</a>
-  </div>
   <div class="row">
     <div class="col-md-8">
+    	@unless (empty($post->image))
+    		<img src="{{ asset('images/'. $post->image) }}" alt="Featured image">
+		@endunless
       	<h1>{{ $post->title }}</h1>
       	<p>
 			@foreach( $post->tag as $tag )
 				<span class="label label-default">{{ $tag->name }}</span>
 			@endforeach
       	</p>
-      	<p>{{ $post->content }}</p>
-
+      	<p>{!! $post->content !!}</p>
+		<br>
+		<h4>Comments <label style="font-size: 13px;" for="commentCounter"> ({{ $post->comment->count() }}) </label> </h4>
+		@foreach ($post->comment as $comment)
+			<div class="commentContainer well">
+				<h4 class="commentTitle"> {{ $comment->title }} </h4>
+				<span class="label label-default author"> Posted by :  {{ $comment->author->name }} </span>
+				<div class="commentBody">{!! $comment->body !!}</div>
+			</div>
+		@endforeach
       	@include ('../comments/create')
     </div>
     <div class="col-md-4">

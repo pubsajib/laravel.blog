@@ -8,16 +8,17 @@ use App\Post;
 use App\Tag;
 use App\Services\Slug;
 use Session;
+use Purifier;
+use Image;
+use File;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -26,8 +27,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         // Get all post
         $posts = Post::orderBy('id', 'desc')->with('category', 'author')->paginate(5);
         // Pass in on view
@@ -88,8 +88,19 @@ class PostController extends Controller
         $post->title        = $request->title;
         $post->slug         = $slug->createSlug($request->title);
         $post->category_id  = $request->category_id;
-        $post->content      = $request->content;
+        $post->content      = Purifier::clean($request->content);
         $post->user_id      = $user->id;
+
+        // Featured image
+        if ( $request->hasFile('image') ) {
+            $image = $request->file('image');
+            $fileName = 'post-'. time() .'.'. $image->getClientOriginalExtension();
+            $location = public_path('images/'. $fileName);
+            Image::make($image)->resize(800, 400)->save($location);
+
+            $post->image    = $fileName;
+        }
+
         $post->save();
 
         // Insert into post_tags table
@@ -110,8 +121,8 @@ class PostController extends Controller
     public function show($id)
     {
         // Get the post content
-        $data['post'] = Post::where('id', $id)->with('tag', 'category', 'author')->first();
-        // $data['post'] = Post::where('id', $id)->with('comment')->first(); // dd($data);
+        $data['post'] = Post::where('id', $id)->with('tag', 'category', 'author', 'comment')->first();
+        // dd($data);
         // Show the single post
         return view('posts.show', $data);
     }
@@ -157,9 +168,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-
+    public function update(Request $request, $id) {
         $post = Post::find($id);
 
         // Validate data
@@ -178,10 +187,22 @@ class PostController extends Controller
             ));
         }
 
+        // Featured image
+        if ( $request->hasFile('image') ) {
+            $image = $request->file('image');
+            // dd($image->getClientOriginalName());
+            $fileName = 'post-'. time() .'.'. $image->getClientOriginalExtension();
+            $location = public_path('images/'. $fileName);
+            Image::make($image)->resize(800, 400)->save($location);
+
+            File::delete('images/'.$post->image);
+            $post->image    = $fileName;
+        }
+
         $post->title        = $request->title;
         $post->slug         = $request->slug;
         $post->category_id  = $request->category_id;
-        $post->content      = $request->content;
+        $post->content      = Purifier::clean($request->content);
         $post->save();
 
         // Update into post_tags table
@@ -203,6 +224,7 @@ class PostController extends Controller
         //Delete the post
         $post = Post::find($id);
         $post->delete();
+        File::delete('images/'. $post->image);
 
         // Redirect after delete
         return redirect()->route('posts.index')->with('success', 'Deleted successfully');

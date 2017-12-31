@@ -8,7 +8,7 @@
       	<span class="label label-default"> Posted By : {{ $comment->author->name }} </span>
       	<span class="label label-default"> <a href="{{ route('comments.edit', $comment->id) }}">Edit</a> </span>
       	<br><br>
-      	<p>{{ $comment->body }}</p>
+      	<p>{!! $comment->body !!}</p>
     </div>
   </div>
 @endsection

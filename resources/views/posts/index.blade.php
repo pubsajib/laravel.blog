@@ -23,12 +23,9 @@
     				<tr>
     					<th> {{ $post->id }} </th>
     					<td> {{ $post->title }} </td>
-    					<td> 
-    						{{ substr( $post->content, 0, 50) }} 
-    						{{ strlen($post->content) > 50 ? '...' : '' }} 
-    					</td>
+    					<td> {{ excerpt($post->content) }} </td>
                         <td> {{ $post->author->name }} </td>
-    					<td> {{ date( 'M j, Y h:i A', strtotime($post->content) ) }} </td>
+    					<td> {{ formatedDate($post->created_at) }} </td>
     					<td style="width: 120px;">
 							<table>
 								<tr>

@@ -2,7 +2,7 @@
     <div class="col-md-12">
       <div class="well_omit">
         {!! Form::open(['route' => 'comments.store']) !!}
-      		<h3>Comment</h3>
+      		<h4>New Comment</h4>
       		<input type="hidden" name="post_id" value="{{ $post->id }}">
       		<div class="form-group">
             {{ Form::text('title', null, array_merge(['class' => 'form-control', 'placeholder' => 'Title'])) }}

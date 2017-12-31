@@ -4,8 +4,7 @@ namespace App\Services;
 
 use App\Post;
 
-class Slug
-{
+class Slug {
     /**
      * @param $title
      * @param int $id
