@@ -18,16 +18,16 @@
 Route::group(['middleware' => ['web']], function () {
 
 	// Authentication routes
-	Route::get('auth/login', ['uses'=>'Auth\LoginController@getLogin', 'as'=>'login']);
-	Route::post('auth/login', ['uses'=>'Auth\LoginController@postLogin', 'as'=>'login']);
-	Route::get('auth/logout', ['uses'=>'Auth\LoginController@getLogout', 'as'=>'logout']);
+	Route::get('login', ['uses'=>'Auth\LoginController@getLogin', 'as'=>'login']);
+	Route::post('login', ['uses'=>'Auth\LoginController@postLogin', 'as'=>'login']);
+	Route::get('logout', ['uses'=>'Auth\LoginController@getLogout', 'as'=>'logout']);
 
 	// User routes
 	Route::resource('user', 'UserController', ['except'=>['create', 'store']]);
 
 	// Authentication routes
-	Route::get('auth/register', ['uses'=>'Auth\RegisterController@getRegister', 'as'=>'register']);
-	Route::post('auth/register', ['uses'=>'Auth\RegisterController@postRegister', 'as'=>'register']);
+	Route::get('register', ['uses'=>'Auth\RegisterController@getRegister', 'as'=>'register']);
+	Route::post('register', ['uses'=>'Auth\RegisterController@postRegister', 'as'=>'register']);
 
 	// Category Routes
 	Route::resource('categories', 'CategoryController', ['except'=>['create']]);

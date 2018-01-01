@@ -15,7 +15,7 @@
     			<tbody>
     				@foreach ($users as $user)
     				<tr>
-    					<td> <a href="{{ route('user.show', $user) }}">{{ $user->name }}</a> </td>
+    					<td> <a href="{{ route('user.show', $user) }}">{{ fullName($user->fname, $user->lname) }}</a> </td>
     					<td> 
 							{!! Html::linkRoute('user.edit', 'Edit', ['id'=>$user->id], ['class'=>'btn btn-xs btn-primary']) !!}
 							{!! Form::open(['method'=>'delete', 'route'=>['user.destroy', $user->id], 'class'=>'pull-right']) !!}

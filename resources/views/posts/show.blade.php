@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-8">
     	@unless (empty($post->image))
-    		<img src="{{ asset('images/'. $post->image) }}" alt="Featured image">
+    		<img src="{{ asset('images/'. $post->image) }}" alt="Featured image" class="img-responsive">
 		@endunless
       	<h1>{{ $post->title }}</h1>
       	<p>
@@ -32,10 +32,6 @@
     <div class="col-md-4">
     	<div class="well text-left">
 			<table class="table table-bordered">
-				<tr>
-					<td>Url : </td>
-					<td><a href="{{ url($post->slug) }}">{{ url($post->slug) }}</a></td>
-				</tr>
 				<tr>
 					<td>Posted In : </td>
 					<td><a href="{{ route('categories.index') }}">{{ $post->category->name }}</a></td>

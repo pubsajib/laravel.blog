@@ -1,5 +1,4 @@
 <?php 
-
 function excerpt($value, $moreText = '...', $size = 50) {
 	$value = strip_tags($value);
 	$text = substr( $value, 0, $size);

@@ -1,5 +1,9 @@
 @extends('main')
-@section('title', 'Comment')
+@section('title', 'Edit comment')
+@section('stylesheets')
+  <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+  {!! Html::script('js/tinymce.js') !!}
+@endsection
 @section('content')
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -11,7 +15,7 @@
         </div>
     		<div class="form-group">
 			    {{ Form::label('body', 'Message : ') }}
-			    {{ Form::text('body', null, ['class' => 'form-control']) }}
+			    {{ Form::textarea('body', null, ['class' => 'form-control']) }}
 		    </div>
         <div class="form-group">
           <label>Is Active : </label>

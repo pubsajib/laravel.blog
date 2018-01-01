@@ -119,8 +119,7 @@ class PostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         // Get the post content
         $data['post'] = Post::where('id', $id)->with('tag', 'category', 'author', 'comment')->first();
         // dd($data);
@@ -134,8 +133,7 @@ class PostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         // Get the post content
         $data['post'] = Post::find($id);
 
@@ -188,7 +186,6 @@ class PostController extends Controller {
             $fileName = 'post-'. time() .'.'. $image->getClientOriginalExtension();
             $location = public_path('images/'. $fileName);
             Image::make($image)->resize(800, 400)->save($location);
-
             File::delete('images/'.$post->image);
             $post->image    = $fileName;
         }
@@ -213,8 +210,7 @@ class PostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //Delete the post
         $post = Post::find($id);
         $post->delete();

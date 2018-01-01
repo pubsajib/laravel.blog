@@ -22,14 +22,13 @@
     			@foreach( $posts as $post )
     				<tr>
     					<th> {{ $post->id }} </th>
-    					<td> {{ $post->title }} </td>
+    					<td> {!! Html::linkRoute('posts.show', $post->title, array($post->id), array('class'=>'')) !!} </td>
     					<td> {{ excerpt($post->content) }} </td>
                         <td> {{ $post->author->name }} </td>
     					<td> {{ formatedDate($post->created_at) }} </td>
     					<td style="width: 120px;">
 							<table>
 								<tr>
-									<td>{!! Html::linkRoute('posts.show', 'View', array($post->id), array('class'=>'btn btn-xs btn-default')) !!}</td>
 									<td>{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class'=>'btn btn-xs btn-primary')) !!}</td>
 									<td>
 										{!! Form::open(['method'=>'delete', 'route'=>['posts.destroy', $post->id], 'class'=>'pull-right']) !!}
