@@ -68,7 +68,7 @@ class UserController extends Controller {
         if ( $request->hasFile('image') ) {
             $image = $request->file('image');
             // dd($image->getClientOriginalName());
-            $fileName = 'posts-'. time() .'.'. $image->getClientOriginalExtension();
+            $fileName = 'user-'. time() .'.'. $image->getClientOriginalExtension();
             $location = public_path('images/'. $fileName);
             Image::make($image)->resize(300, 300)->save($location);
             File::delete('images/'.$user->image);
