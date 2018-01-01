@@ -81,6 +81,7 @@ class PostController extends Controller {
             // 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'category_id' => 'required|integer',
             'content' => 'required',
+            'image' => 'sometimes|image',
             ));
         // dd($slug->createSlug($request->title));
         // Store in the database
@@ -172,20 +173,13 @@ class PostController extends Controller {
         $post = Post::find($id);
 
         // Validate data
-        if ( $request->input('slug') == $post->slug ) {
-            $request->validate(array(
-                'title'         => 'required|max:255',
-                'category_id'   => 'required|integer',
-                'content'       => 'required',
-            ));
-        } else {
-            $request->validate(array(
-                'title'         => 'required|max:255',
-                'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'category_id'   => 'required|integer',
-                'content'       => 'required',
-            ));
-        }
+        $request->validate(array(
+            'title'         => 'required|max:255',
+            'slug'          => "required|alpha_dash|min:5|max:255|unique:posts,slug,$id",
+            'category_id'   => 'required|integer',
+            'content'       => 'required',
+            'image'         => 'image',
+        ));
 
         // Featured image
         if ( $request->hasFile('image') ) {
