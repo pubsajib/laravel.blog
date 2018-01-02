@@ -16,8 +16,8 @@
 				    {{ Form::text('title', null, array_merge(['class' => 'form-control'])) }}
 				</div>
 	      		<div class="form-group">
-				    {{ Form::label('content', 'Content : ') }}
-				    {{ Form::textarea('content', null, array_merge(['class' => 'form-control'])) }}
+				    {{ Form::label('body', 'Content : ') }}
+				    {{ Form::textarea('body', null, array_merge(['class' => 'form-control'])) }}
 				</div>
 	      	</div>
     	</div>

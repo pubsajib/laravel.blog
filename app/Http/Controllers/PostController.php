@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\Slug;
 use App\Category;
 use App\Post;
 use App\Tag;
-use App\Services\Slug;
-use Session;
 use Purifier;
 use Image;
 use File;
@@ -89,7 +88,7 @@ class PostController extends Controller {
         $post->title        = $request->title;
         $post->slug         = $slug->createSlug($request->title);
         $post->category_id  = $request->category_id;
-        $post->content      = Purifier::clean($request->content);
+        $post->content      = Purifier::clean($request->body);
         $post->user_id      = $user->id;
 
         // Featured image
@@ -193,7 +192,7 @@ class PostController extends Controller {
         $post->title        = $request->title;
         $post->slug         = $request->slug;
         $post->category_id  = $request->category_id;
-        $post->content      = Purifier::clean($request->content);
+        $post->content      = Purifier::clean($request->body);
         $post->save();
 
         // Update into post_tags table
