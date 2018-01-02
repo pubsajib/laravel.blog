@@ -9,6 +9,11 @@
 			    {{ Form::label('image', 'Avatar : ') }}
 			    {{ Form::file('image') }}
 			</div>
+			@if ($user->image)
+				<div class="userImageContainer">
+					<img src="{{ asset('images/'. $user->image) }}" alt="Avatar">
+				</div>
+			@endif
       		<div class="form-group">
 			    {{ Form::label('fname', 'First Name : ') }}
 			    {{ Form::text('fname', null, array_merge(['class' => 'form-control'])) }}

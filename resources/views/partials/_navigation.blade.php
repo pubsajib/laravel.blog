@@ -32,6 +32,7 @@
               <li><a href="{{ route('comments.index') }}">Comments</a></li>
               <li><a href="{{ route('categories.index') }}">Categories</a></li>
               <li><a href="{{ route('tags.index') }}">Tags</a></li>
+              <li><a href="{{ route('user.index') }}">Users</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="{{ route('logout') }}">Logout</a></li>
             </ul>
