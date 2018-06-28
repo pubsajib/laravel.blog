@@ -18,7 +18,7 @@ class PostController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
     }
 
     /**
@@ -172,7 +172,7 @@ class PostController extends Controller {
         // Validate data
         $request->validate(array(
             'title'         => 'required|max:255',
-            'slug'          => "required|alpha_dash|min:5|max:255|unique:posts,slug,$id",
+            'slug'          => "required|alpha_dash|min:3|max:255|unique:posts,slug,$id",
             'category_id'   => 'required|integer',
             'content'       => 'required',
             'image'         => 'image',
@@ -192,7 +192,7 @@ class PostController extends Controller {
         $post->title        = $request->title;
         $post->slug         = $request->slug;
         $post->category_id  = $request->category_id;
-        $post->content      = Purifier::clean($request->body);
+        $post->content      = Purifier::clean($request->content);
         $post->save();
 
         // Update into post_tags table

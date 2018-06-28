@@ -6,11 +6,11 @@
       	{!! Form::open() !!}
       		<h1>User Login</h1> <hr>
       		<div class="form-group">
-			    {{ Form::label('email', 'Email : ') }}
+			    {{ Form::label('email', 'Email : admin@atitonline.com') }}
 			    {{ Form::text('email', null, array_merge(['class' => 'form-control'])) }}
 			</div>
 			<div class="form-group">
-			    {{ Form::label('password', 'Password : ') }}
+			    {{ Form::label('password', 'Password : 123456') }}
 			    {{ Form::password('password', array_merge(['class' => 'form-control'])) }}
 			</div>
 			<div class="form-group">

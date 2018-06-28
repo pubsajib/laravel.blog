@@ -16,8 +16,8 @@
             {{ Form::text('title', null, ['class' => 'form-control']) }}
           </div>
           <div class="form-group">
-            {{ Form::label('body', 'Content : ') }}
-            {{ Form::textarea('body', null, ['class' => 'form-control']) }}
+            {{ Form::label('content', 'Content : ') }}
+            {{ Form::textarea('content', null, ['class' => 'form-control']) }}
           </div>
         </div>
       </div>

@@ -24,10 +24,12 @@
 			<div class="commentContainer well">
 				<h4 class="commentTitle"> {{ $comment->title }} </h4>
 				<span class="label label-default author"> Posted by :  {{ $comment->author->name }} </span>
-				<div class="commentBody">{!! $comment->body !!}</div>
+				<div class="commentBody">{!! $comment->conent !!}</div>
 			</div>
 		@endforeach
-      	@include ('../comments/create')
+		@if(Auth::check())
+      		@include ('../comments/create')
+      	@endif
     </div>
     <div class="col-md-4">
     	<div class="well text-left">

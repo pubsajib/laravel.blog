@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Mail\Contact;
+use DB;
+use Session;
 
 class PageController extends Controller
 {
