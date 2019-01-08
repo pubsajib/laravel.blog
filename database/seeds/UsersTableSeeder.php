@@ -18,7 +18,16 @@ class UsersTableSeeder extends Seeder
                 'email'         => 'admin@gmail.com', 
                 'user_level'    => 0, 
                 'is_active'     => 1, 
-                'password'      => bcrypt('123'), 
+                'password'      => bcrypt('123456'), 
+                'created_at'    => date("Y-m-d h:i:s"), 
+                'updated_at'    => date("Y-m-d h:i:s")
+            ],
+            [
+                'fname'         => 'Admin 2', 
+                'email'         => 'email@gmail.com', 
+                'user_level'    => 0, 
+                'is_active'     => 1, 
+                'password'      => bcrypt('123456'), 
                 'created_at'    => date("Y-m-d h:i:s"), 
                 'updated_at'    => date("Y-m-d h:i:s")
             ],
@@ -45,7 +54,7 @@ class UsersTableSeeder extends Seeder
                 'email'         => 'user@gmail.com', 
                 'user_level'    => 1, 
                 'is_active'     => 1, 
-                'password'      => bcrypt('123'), 
+                'password'      => bcrypt('123456'), 
                 'created_at'    => date("Y-m-d h:i:s"), 
                 'updated_at'    => date("Y-m-d h:i:s")
             ]

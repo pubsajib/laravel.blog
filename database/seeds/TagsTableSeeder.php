@@ -1,17 +1,10 @@
 <?php
-
 use Illuminate\Database\Seeder;
 
-class TagsTableSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
+class TagsTableSeeder extends Seeder {
+    public function run() {
         // create default tags
+        factory(App\Category::class, 9)->create();
         DB::table('tags')->insert([
             ['name' => 'HTML', 'created_at' => date("Y-m-d h:i:s"), 'updated_at' => date("Y-m-d h:i:s")],
             ['name' => 'CSS', 'created_at' => date("Y-m-d h:i:s"), 'updated_at' => date("Y-m-d h:i:s")],

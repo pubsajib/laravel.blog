@@ -14,8 +14,8 @@ $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'title' => $title,
         'slug' => str_slug($title).'-'.time(),
-        'user_id' => 1,
-        'category_id' => 1,
+        'user_id' => rand(1,5),
+        'category_id' => rand(1,10),
         'content' => $body,
         'created_at'    => date("Y-m-d h:i:s"), 
         'updated_at'    => date("Y-m-d h:i:s")
