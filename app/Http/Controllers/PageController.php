@@ -8,11 +8,9 @@ use App\Mail\Contact;
 use DB;
 use Session;
 
-class PageController extends Controller
-{
+class PageController extends Controller {
     // Home page controller
-    public function home()
-    {
+    public function home() {
         // Get all post
         $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
         // Pass in on view
@@ -25,25 +23,7 @@ class PageController extends Controller
         // Pass in on view
         return view('pages.about');
     }
-
-    // Contact page controller
-    public function getContact()
-    {
-        // Get all post
-        // Pass in on view
-        return view('pages.contact');
-    }
-    public function postContact(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'subject' => 'required|min:3'
-        ]);
-        \Mail::to('pubsajib@gmail.com')->send(new Contact($request));
-        return redirect()->route('contact')->with('success', 'Mail sent successfully');
-    }
-    public function mailTemplate()
-    {
+    public function mailTemplate() {
         return new Contact();
     }
 }

@@ -51,8 +51,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	// Static pages
 	Route::get('about', 'PageController@about');
-	Route::get('contact', ['as' => 'contact', 'uses'=>'PageController@getContact']);
-	Route::post('contact', ['as' => 'contact', 'uses' => 'PageController@postContact']);
+	Route::get('contact', ['as' => 'contact', 'uses'=>'MessageController@show']);
+	Route::post('contact', ['as' => 'contact', 'uses' => 'MessageController@save']);
 	// Route::get('/{slug}', ['as'=>'single', 'uses'=>'blogController@getSingle'])->where( 'slug', '[\w\d\-\_]+');
 	Route::get('/', 'PageController@home');
 });
