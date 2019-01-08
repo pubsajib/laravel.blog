@@ -12,12 +12,14 @@
     		<img src="{{ asset('images/'. $post->image) }}" alt="Featured image" class="img-responsive">
 		@endunless
       	<h1>{{ $post->title }}</h1>
-      	<p>
-			@foreach( $post->tag as $tag )
-				<span class="label label-default">{{ $tag->name }}</span>
-			@endforeach
-      	</p>
-      	<p>{!! $post->content !!}</p>
+      	@if($post->tag)
+	      	<p>
+				@foreach( $post->tag as $tag )
+					<span class="label label-default">{{ $tag->name }}</span>
+				@endforeach
+	      	</p>
+	     @endif
+      	{!! $post->content !!}
 		<br>
 		<h4>Comments <label style="font-size: 13px;" for="commentCounter"> ({{ $post->comment->count() }}) </label> </h4>
 		@foreach ($post->comment as $comment)
