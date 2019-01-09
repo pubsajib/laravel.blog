@@ -12,7 +12,7 @@ class CategoryController extends Controller {
     }
     public function index() {
         // Fetch all categories
-        $categories = Category::all();
+        $categories = Category::latest()->paginate(10);
         return view('categories.index')->withCategories($categories);
     }
     public function store(Request $request) {
@@ -32,33 +32,24 @@ class CategoryController extends Controller {
     public function show($id) {
         // Get the category
         $category = Category::where('id', $id)->with('posts')->first();
-        return view('categories.single', compact('category'));
+        return view('categories.show', compact('category'));
     }
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+        $category = Category::find($id);
+        return view('categories.edit', compact('category'));
     }
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required|max:255'
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        // Store categories
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
+        return view('categories.show', compact('category'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //Delete the category
         $category = Category::find($id);
         $category->delete();

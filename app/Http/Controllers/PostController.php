@@ -12,32 +12,15 @@ use Image;
 use File;
 
 class PostController extends Controller {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct() {
         $this->middleware('auth')->except('show');
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index() {
         // Get all post
         $posts = Post::orderBy('id', 'desc')->with('category', 'author')->paginate(5);
         // Pass in on view
         return view('posts.index')->withPosts($posts);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
         // Get all posts for select view
         $categories = Category::all();
@@ -62,13 +45,6 @@ class PostController extends Controller {
         // Create new post form
         return view('posts.create', $data);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
         // dd($request);
         $user = \Auth::user();
@@ -109,29 +85,17 @@ class PostController extends Controller {
         // Success Message
         // Redirect to another page
         return redirect()->route('posts.show', $post->id)->with('success', 'Created successfully.');
-
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id) {
         // Get the post content
-        $data['post'] = Post::where('id', $id)->with('tag', 'category', 'author', 'comment')->first();
-        // dd($data);
+        if (is_numeric($id)) {
+            $post = Post::where('id', $id)->with('tag', 'category', 'author', 'comment')->first();
+        } else{
+            $post = Post::where('slug', $id)->with('tag', 'category', 'author', 'comment')->first();
+        }
         // Show the single post
-        return view('posts.show', $data);
+        return view('posts.show', compact('post'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id) {
         // Get the post content
         $data['post'] = Post::find($id);
@@ -158,14 +122,6 @@ class PostController extends Controller {
         // Edit post form
         return view('posts.edit', $data);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id) {
         $post = Post::find($id);
 

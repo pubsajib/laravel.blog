@@ -1,7 +1,7 @@
 @if ($posts)
     @foreach ($posts as $post)
         <div class="post">
-            <h3>{!! Html::linkRoute('posts.show', $post->title, [$post->id] ) !!}</h3>
+            <h3>{!! Html::linkRoute('posts.show', $post->title, [$post->slug] ) !!}</h3>
             <p>{{ excerpt($post->content, 300) }} </p>
             @if ( strlen(strip_tags($post->content)) > 300 )
             {!! Html::linkRoute('blog.single', 'Read More', [$post->slug], ['class'=>'btn btn-primary']) !!}

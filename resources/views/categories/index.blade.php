@@ -14,18 +14,19 @@
     			</thead>
     			<tbody>
     				@foreach ($categories as $category)
-    				<tr>
-    					<td> <a href="{{ route('categories.show', $category) }}"> {{ $category->name }} </a> </td>
-    					<td> 
-							{!! Html::linkRoute('categories.edit', 'Edit', ['id'=>$category->id], ['class'=>'btn btn-xs btn-primary']) !!}
-							{!! Form::open(['method'=>'delete', 'route'=>['categories.destroy', $category->id], 'class'=>'pull-right']) !!}
-								{!! Form::submit('Delete', ['class'=>'btn btn-xs btn-danger']) !!}
-							{!! Form::close() !!}
-    					</td>
-    				</tr>
+        				<tr>
+        					<td> <a href="{{ route('categories.show', $category) }}"> {{ $category->name }} </a> </td>
+        					<td> 
+    							{!! Html::linkRoute('categories.edit', 'Edit', ['id'=>$category->id], ['class'=>'btn btn-xs btn-primary']) !!}
+    							{!! Form::open(['method'=>'delete', 'route'=>['categories.destroy', $category->id], 'class'=>'pull-right']) !!}
+    								{!! Form::submit('Delete', ['class'=>'btn btn-xs btn-danger']) !!}
+    							{!! Form::close() !!}
+        					</td>
+        				</tr>
     				@endforeach
     			</tbody>
     		</table>
+            <div class="text-center">{{ $categories->links() }}</div>
     	@else
     		<p class="text-center"><strong>Not Found!</strong></p>
     	@endif
@@ -37,9 +38,7 @@
     			{!! Form::label('name', 'Name') !!}
     			{!! Form::text('name', null, ['class'=>'form-control']) !!}
     			<br>
-    			<p class="text-center">
-    				{!! Form::submit('Submit', ['class'=>'btn btn-success']) !!}
-    			</p>
+    			<p class="text-center"> {!! Form::submit('Submit', ['class'=>'btn btn-success']) !!} </p>
     		{!! Form::close() !!}
     	</div>
     </div>

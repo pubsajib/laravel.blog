@@ -2,7 +2,7 @@
 @section('title', 'Category')
 @section('content')
   <div class="row">
-    <div class="col-md-8 col-sm-offset-2">
+    <div class="col-md-12">
       	<div class="row">
       		<div class="col-sm-8"><h1>{{ $category->name }} Category</h1></div>
       		<div class="col-sm-4"><a href="{{ route('categories.index') }}" class="btn btn-primary btn-lg btnSpacing">View All</a></div>
@@ -18,8 +18,8 @@
       			<tbody>
       				@foreach( $category->posts as $post ) 
       				<tr> 
-      					<td>{{ $post->title }}</td> 
-      					<td>{!! $post->content !!}</td> 
+      					<td><a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a></td> 
+      					<td>{!! excerpt($post->content, 200) !!}</td> 
       				</tr>
       				@endforeach
       			</tbody>
