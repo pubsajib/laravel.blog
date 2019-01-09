@@ -12,7 +12,7 @@ class PageController extends Controller {
     // Home page controller
     public function home() {
         // Get all post
-        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         // Pass in on view
         return view('pages.home')->withPosts($posts);
     }

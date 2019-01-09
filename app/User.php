@@ -29,4 +29,7 @@ class User extends Authenticatable {
     public function comments() {
         return $this->hasMany(Comment::class)->where('is_approved', 1);
     }
+    public function getFullNameAttribute() {
+        return ucfirst($this->fname) .' '. ucfirst($this->lname);
+    }
 }

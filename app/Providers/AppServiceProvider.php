@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //Import Schema
+use App\Post;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,10 +13,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
+    public function boot() {
         Schema::defaultStringLength(191); //Solved by increasing StringLength
+        view()->composer('partials._sidebar', function($view) {
+            $view->with('recent', Post::orderBy('created_at', 'desc')->limit(4)->get());
+        });
     }
 
     /**

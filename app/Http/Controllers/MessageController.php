@@ -9,14 +9,16 @@ use DB;
 use Session;
 
 class MessageController extends Controller {
-    // Contact page controller
+    public function index() {
+        $messages = Message::orderBy('id', 'desc')->get();
+        return view('messages.index', compact('messages'));
+    }
     public function show() {
-        // Get all post
-        // Pass in on view
         return view('pages.contact');
     }
     public function save(Request $request) {
         $request->validate([
+            'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required|min:3'
         ]);

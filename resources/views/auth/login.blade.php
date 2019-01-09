@@ -6,7 +6,7 @@
       	{!! Form::open() !!}
       		<h1>User Login</h1> <hr>
       		<div class="form-group">
-			    {{ Form::label('email', 'Email : admin@atitonline.com') }}
+			    {{ Form::label('email', 'Email : email@gmail.com') }}
 			    {{ Form::text('email', null, array_merge(['class' => 'form-control'])) }}
 			</div>
 			<div class="form-group">
@@ -14,7 +14,7 @@
 			    {{ Form::password('password', array_merge(['class' => 'form-control'])) }}
 			</div>
 			<div class="form-group">
-			    {{ Form::checkbox('remember') }} {{ Form::label('remember', 'Remember Me') }}
+			    <label for="remember"><input id="remember" name="remember" type="checkbox" value="1"> Remember Me</label>
 			</div>
       		<div class="form-group">
 			    {{ Form::submit('LogIn', array_merge(['class' => 'btn btn-success btn-lg btn-block'])) }}

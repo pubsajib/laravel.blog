@@ -14,6 +14,7 @@
     <div class="row">
         <div class="col-md-8 postWrapper">
             @include('partials._loop')
+            {{ $posts->links() }}
         </div>
         <div class="col-md-4"> @include('partials._sidebar') </div>
     </div>
