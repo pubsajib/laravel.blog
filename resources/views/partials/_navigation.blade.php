@@ -1,6 +1,6 @@
 <!-- Default Bootstrap Navbar -->
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -22,23 +22,23 @@
                 <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{ url('about') }}">About</a></li>
                 <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{ url('contact') }}">Contact</a></li>
                 @if ( Auth::check() )
-                <li class="dropdown">
-                    <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::User()->full_name }} <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                        <li><a href="{{ route('comments.index') }}">Comments</a></li>
-                        <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                        <li><a href="{{ route('tags.index') }}">Tags</a></li>
-                        <li><a href="{{ route('messages.index') }}">Messages</a></li>
-                        <li><a href="{{ route('user.index') }}">Users</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{ route('logout') }}">Logout</a></li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::User()->full_name }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('posts.index') }}">Posts</a></li>
+                            <li><a href="{{ route('comments.index') }}">Comments</a></li>
+                            <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                            <li><a href="{{ route('tags.index') }}">Tags</a></li>
+                            <li><a href="{{ route('messages.index') }}">Messages</a></li>
+                            <li><a href="{{ route('user.index') }}">Users</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                @endif
             </ul>
-            @else
-            <a href="{{ route('login') }}" class="btn btn-default navbar-right">Login</a>
-            @endif
         </div>
         <!-- /.navbar-collapse -->
     </div>
