@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use Auth;
 
 class CommentController extends Controller
 {
@@ -34,8 +35,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $request->validate([
             'title' => 'required',
             'body'  => 'required',
@@ -47,11 +47,11 @@ class CommentController extends Controller
         $comment->title     = $request->title;
         $comment->body      = $request->body;
         $comment->post_id   = $request->post_id;
-        $comment->user_id   = $user->id;
+        $comment->user_id   = Auth::User()->id;
         $comment->is_approved   = 0;
         $comment->save();
 
-        return redirect()->route('comments.index');
+        return redirect()->route('posts.show', $request->post_id);
     }
 
     /**

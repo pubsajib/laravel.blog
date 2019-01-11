@@ -20,13 +20,14 @@
 	      	</p>
 	     @endif
       	{!! $post->content !!}
+			{{-- <hr> {{ $post->comment }} <hr> --}}
 		<br>
 		<h4>Comments <label style="font-size: 13px;" for="commentCounter"> ({{ $post->comment->count() }}) </label> </h4>
 		@foreach ($post->comment as $comment)
 			<div class="commentContainer well">
 				<h4 class="commentTitle"> {{ $comment->title }} </h4>
-				<span class="label label-default author"> Posted by :  {{ $comment->author->name }} </span>
-				<div class="commentBody">{!! $comment->conent !!}</div>
+				<span class="label label-default author"> Posted by :  {{ $comment->author->full_name }} </span>
+				<div class="commentBody">{!! excerpt($comment->body, 150) !!}</div>
 			</div>
 		@endforeach
 		@if(Auth::check())
@@ -42,7 +43,7 @@
 				</tr>
 				<tr>
 					<td>Author : </td>
-					<td><a href="{{ route('user.show', $post->author) }}">{{ $post->author->name }}</a></td>
+					<td><a href="{{ route('user.show', $post->author) }}">{{ $post->author->full_name }}</a></td>
 				</tr>
 				<tr>
 					<td>Created At : </td>
