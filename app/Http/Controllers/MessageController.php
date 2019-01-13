@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -22,6 +21,14 @@ class MessageController extends Controller {
             'email' => 'required|email',
             'subject' => 'required|min:3'
         ]);
+
+        $message = new Message;
+        $message->name = $request->name;
+        $message->email = $request->email;
+        $message->subject = $request->subject;
+        $message->body = $request->message;
+        $message->save();
+        // dd($message);
         \Mail::to('pubsajib@gmail.com')->send(new Contact($request));
         return redirect()->route('contact')->with('success', 'Mail sent successfully');
     }

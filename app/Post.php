@@ -14,6 +14,6 @@ class post extends Model {
 		return $this->belongsTo(User::class, 'user_id');
 	}
 	public function comment() {
-		return $this->hasMany(Comment::class)->where('is_approved', 1);
+		return $this->hasMany(Comment::class)->where('is_approved', 1)->latest();
 	}
 }
